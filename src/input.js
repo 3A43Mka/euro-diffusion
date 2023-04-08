@@ -28,8 +28,12 @@ function readCasesFromFile() {
 }
 
 function getLines(filepath) {
-  const file = fs.readFileSync(filepath, "utf8");
-  return file.toString().split("\n");
+  try {
+    const file = fs.readFileSync(filepath, "utf8");
+    return file.toString().split("\n");
+  } catch (e) {
+    throw new Error(`Input file by the path ${filepath} doesn't exist`);
+  }
 }
 
 function getCountry(line) {
@@ -38,6 +42,9 @@ function getCountry(line) {
     throw new Error("Wrong data structure, unable to get country");
   }
   for (let i = 1; i< 5; i++) {
+    if (isNaN(+data[i])) {
+      throw new Error(`Country coords should be numbers: ${data[i]} is not a number`);
+    }
     if ((+data[i] < 1 ) || (+data[i] > 10)) {
       throw new Error(`Invalid country coords: ${data[i]}`);
     }
