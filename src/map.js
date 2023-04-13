@@ -21,16 +21,14 @@ class Map {
       for (let x = 0; x <= config.gridSize; x++) {
         for (let y = 0; y <= config.gridSize; y++) {
           if (this.grid[x][y] !== undefined) {
-            const city = this.grid[x][y];
-            city.transferToNeighbors();
+            this.grid[x][y].transferToNeighbors();
           }
         }
       }
       for (let x = 0; x <= config.gridSize; x++) {
         for (let y = 0; y <= config.gridSize; y++) {
           if (this.grid[x][y] !== undefined) {
-            const city = this.grid[x][y];
-            city.finalizeBalancePerDay();
+            this.grid[x][y].finalizeBalancePerDay();
           }
         }
       }
